@@ -2,6 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,6 +17,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
+        <Header />
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
@@ -38,7 +41,6 @@ export default function Home() {
             </a>
           </div>
         </div>
-
         <div className={styles.center}>
           <Image
             className={styles.logo}
@@ -49,7 +51,6 @@ export default function Home() {
             priority
           />
         </div>
-
         <div className={styles.grid}>
           <a
             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
@@ -108,6 +109,7 @@ export default function Home() {
             </p>
           </a>
         </div>
+        <Footer />
       </main>
     </>
   );
