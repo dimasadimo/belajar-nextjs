@@ -18,6 +18,7 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <Header />
+        <p className="background-orange">Content</p>
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
