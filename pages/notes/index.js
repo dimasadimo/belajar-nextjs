@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useQueries } from "@/hooks/useQueries";
 
 const LayoutComponent = dynamic(() => import('@/layout'), {
   loading: () => <p>Loading...</p>,
@@ -24,7 +25,8 @@ const LayoutComponent = dynamic(() => import('@/layout'), {
 export default function Notes({ }) {
 
   const router = useRouter();
-  const [notes, setNotes] = useState(); 
+  //const [notes, setNotes] = useState(); 
+  const { data: notes } = useQueries({ prefixUrl: "https://paace-f178cafcae7b.nevacloud.io/api/notes" });
 
   const HandleDelete = async (id) => {
     try {
@@ -39,15 +41,14 @@ export default function Notes({ }) {
         }
     } catch (error) {}
   };
-
-  useEffect(() => {
-    async function fetchingData() {
-      const res = await fetch("https://paace-f178cafcae7b.nevacloud.io/api/notes");
-      const listNotes = await res.json();
-      setNotes(listNotes);
-    }
-    fetchingData();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchingData() {
+  //     const res = await fetch("https://paace-f178cafcae7b.nevacloud.io/api/notes");
+  //     const listNotes = await res.json();
+  //     setNotes(listNotes);
+  //   }
+  //   fetchingData();
+  // }, []);
 
   return (
     <LayoutComponent metaTitle="Notes" metaDescription="All contents belong to Notes">
