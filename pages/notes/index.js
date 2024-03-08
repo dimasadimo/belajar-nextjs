@@ -17,6 +17,8 @@ import {
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useQueries } from "@/hooks/useQueries";
+import useSWR from 'swr';
+import fetcher from "@/utils/fetcher";
 
 const LayoutComponent = dynamic(() => import('@/layout'), {
   loading: () => <p>Loading...</p>,
@@ -26,7 +28,11 @@ export default function Notes({ }) {
 
   const router = useRouter();
   //const [notes, setNotes] = useState(); 
-  const { data: notes } = useQueries({ prefixUrl: "https://paace-f178cafcae7b.nevacloud.io/api/notes" });
+  //const { data: notes } = useQueries({ prefixUrl: "https://paace-f178cafcae7b.nevacloud.io/api/notes" });
+  const { data: notes, isLoading } = useSWR("https://paace-f178cafcae7b.nevacloud.io/api/notes", fetcher, {
+    refreshInterval: 10,
+    revalidateOnFocus: true,
+  });
 
   const HandleDelete = async (id) => {
     try {
