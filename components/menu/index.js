@@ -12,16 +12,19 @@ import { useQueries } from '@/hooks/useQueries';
 import Cookies from 'js-cookie';
 import { useMutation } from '@/hooks/useMutation';
 import { useRouter } from "next/router";
+import { useContext } from 'react';
+import { UserContext } from '@/context/userContext';
 
 const MenuHeader = () => {
   const router = useRouter();
   const { mutate } = useMutation();
-  const { data } = useQueries({ prefixUrl: 'https://paace-f178cafcae7b.nevacloud.io/api/user/me', 
-    headers: {
-      Authorization: `Bearer ${Cookies.get('user_token')}`, 
-    },
-  })
-
+  const value = useContext(UserContext);
+  // const { data } = useQueries({ prefixUrl: 'https://paace-f178cafcae7b.nevacloud.io/api/user/me', 
+  //   headers: {
+  //     Authorization: `Bearer ${Cookies.get('user_token')}`, 
+  //   },
+  // })
+  
   const HandleLogout = async () => {
     const response = await mutate({ 
       url: 'https://paace-f178cafcae7b.nevacloud.io/api/logout', 
@@ -49,7 +52,7 @@ const MenuHeader = () => {
         <li>
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              {data?.data?.name}
+              {value?.name}
             </MenuButton>
             <MenuList>
               <MenuItem onClick={HandleLogout}>Logout</MenuItem>
